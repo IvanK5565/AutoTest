@@ -1,0 +1,3 @@
+[submodule "gauss_js"]
+	path = gauss_js
+	url = https://github.com/LiannaAsatryan/gauss_js
