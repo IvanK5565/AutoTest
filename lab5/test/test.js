@@ -1,5 +1,4 @@
-import { equal } from 'assert';
-
+import { equal, ok } from 'assert';
 
 describe('tests', ()=>{
     it('Set Country in Views/Auto Complete/ 1. Screen Top', async ()=>{
@@ -10,35 +9,34 @@ describe('tests', ()=>{
         const country = await $('//*[@resource-id="io.appium.android.apis:id/edit"]').getText()
         
         equal(country, 'Ukraine')
+    })
+    it('Check "selected" in Views/Controls/1. Light Theme', async ()=>{
+        await $('/hierarchy/android.widget.FrameLayout').back()
+        await $('/hierarchy/android.widget.FrameLayout').back()
 
-        await $('/hierarchy/android.widget.FrameLayout').back()
-        await $('/hierarchy/android.widget.FrameLayout').back()
+        await $('//*[@content-desc="Controls"]').click()
+        await $('//*[@content-desc="1. Light Theme"]').click()
+
+        let checked = await $('//android.widget.CheckBox[@content-desc="Checkbox 1"]').getAttribute('checked')
+        equal(checked, 'false')
+
+        await $('//android.widget.CheckBox[@content-desc="Checkbox 1"]').click()
+        checked = await $('//android.widget.CheckBox[@content-desc="Checkbox 1"]').getAttribute('checked')
+        equal(checked,'true')
     })
     it('Check toggle button in Views/Buttons', async ()=>{
+        await $('/hierarchy/android.widget.FrameLayout').back()
+        await $('/hierarchy/android.widget.FrameLayout').back()
+
         await $('//*[@content-desc="Buttons"]').click()
 
-        buttonState = await $('//android.widget.ToggleButton[@content-desc="Toggle"]').getChecked()
-        ok(!buttonState)
+        let buttonState = await $('//android.widget.ToggleButton[@content-desc="Toggle"]').getAttribute('checked')
+        equal(buttonState, 'false')
 
         await $('//android.widget.ToggleButton[@content-desc="Toggle"]').click()
-        buttonState = await $('//android.widget.ToggleButton[@content-desc="Toggle"]').getChecked()
-        ok(buttonState)
+        buttonState = await $('//android.widget.ToggleButton[@content-desc="Toggle"]').getAttribute('checked')
+        equal(buttonState,'true')
         
         await $('/hierarchy/android.widget.FrameLayout').back()
-    })
-    it('Check "selected" in Views/Radio Group', async ()=>{
-        await $('//android.widget.FrameLayout[@resource-id="android:id/content"]').swipe(75,2000,75,500)
-        await $('//*[@content-desc="Radio Group"]').click()
-
-        selected = await $('//*[@content-desc="You have selected: (none)"]').getText()
-        equal(selected, "You have selected: 2131296544")
-
-        await $('//*[@content-desc="Clear"]').click()
-        selected = await $('//*[@content-desc="You have selected: (none)"]').getText()
-        equal(selected, "You have selected: (none)")
-
-        await $('//*[@resource-id="io.appium.android.apis:id/snack"]').click()
-        selected = await $('//*[@content-desc="You have selected: (none)"]').getText()
-        equal(selected, 'You have selected: 2131296728')
     })
 })
