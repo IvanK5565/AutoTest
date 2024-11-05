@@ -1,5 +1,4 @@
 const request = require('supertest');
-const fs = require('fs')
 
 describe('GETs', function () {
     it('/public/v2/users/7480808/posts', function (done) {

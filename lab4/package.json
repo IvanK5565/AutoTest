@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "node selenium.js"
+    "test": "node selenium.js",
+    "cypress": "cypress run"
   },
   "author": "",
   "license": "ISC",
